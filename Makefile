@@ -104,31 +104,31 @@ INTEG_TEST_COVERPKG := -coverpkg="$(MODULE_ROOT)/client/...,$(MODULE_ROOT)/commo
 ##### Tools #####
 update-checkers:
 	@printf $(COLOR) "Install/update check tools..."
-	@go install golang.org/x/lint/golint@latest
-	@go install golang.org/x/tools/cmd/goimports@latest
-	@go install honnef.co/go/tools/cmd/staticcheck@v0.3.2
-	@go install github.com/kisielk/errcheck@v1.6.1
-	@go install github.com/googleapis/api-linter/cmd/api-linter@v1.32.3
-	@go install github.com/bufbuild/buf/cmd/buf@v1.6.0
+	@go get -u golang.org/x/lint/golint@latest
+	@go get -u golang.org/x/tools/cmd/goimports@latest
+	@go get -u honnef.co/go/tools/cmd/staticcheck@v0.3.2
+	@go get -u github.com/kisielk/errcheck@v1.6.1
+	@go get -u github.com/googleapis/api-linter/cmd/api-linter@v1.32.3
+	@go get -u github.com/bufbuild/buf/cmd/buf@v1.6.0
 
 update-mockgen:
 	@printf $(COLOR) "Install/update mockgen tool..."
-	@go install github.com/golang/mock/mockgen@v1.6.0
+	@go get -u github.com/golang/mock/mockgen@v1.6.0
 
 update-proto-plugins:
 	@printf $(COLOR) "Install/update proto plugins..."
-	@go install github.com/temporalio/gogo-protobuf/protoc-gen-gogoslick@master
+	@go get -u github.com/temporalio/gogo-protobuf/protoc-gen-gogoslick@master
 # This to download sources of gogo-protobuf which are required to build proto files.
 	@GO111MODULE=off go get github.com/temporalio/gogo-protobuf/protoc-gen-gogoslick
-	@go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+	@go get -u google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 
 update-tctl:
 	@printf $(COLOR) "Install/update tctl..."
-	@go install github.com/temporalio/tctl/cmd/tctl@latest
+	@go get -u github.com/temporalio/tctl/cmd/tctl@latest
 
 update-ui:
 	@printf $(COLOR) "Install/update temporal ui-server..."
-	@go install github.com/temporalio/ui-server/cmd/server@latest
+	@go get -u github.com/temporalio/ui-server/cmd/server@latest
 
 update-tools: update-checkers update-mockgen update-proto-plugins
 
@@ -340,7 +340,7 @@ coverage-report: $(SUMMARY_COVER_PROFILE)
 
 ci-coverage-report: $(SUMMARY_COVER_PROFILE) coverage-report
 	@printf $(COLOR) "Generate Coveralls report from $(SUMMARY_COVER_PROFILE)..."
-	go install github.com/mattn/goveralls@v0.0.7
+	go get -u github.com/mattn/goveralls@v0.0.7
 	@goveralls -coverprofile=$(SUMMARY_COVER_PROFILE) -service=buildkite || true
 
 ##### Schema #####
